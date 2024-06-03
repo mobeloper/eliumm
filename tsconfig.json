@@ -1,8 +1,29 @@
 {
-    "compilerOptions": {
-      "declaration": true,
-      "emitDeclarationOnly": true,
-      "outDir": "./types"
-    },
-    "include": ["src/**/*"]
-} 
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "./types",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "noEmit": true,
+    "incremental": true,
+    "module": "esnext",
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve"
+  },
+  "include": [
+    "src/**/*"
+, "my-nextjs-app/eliumm", "my-nextjs-app/eliumm/scanRoutes.js"  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

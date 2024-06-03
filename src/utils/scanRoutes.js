@@ -1,27 +1,24 @@
-const fs = require('fs');
-const path = require('path');
+let fs;
+let path;
+if (typeof window === 'undefined') {
+  fs = require('fs');
+  path = require('path');
+}
 
 const scanRoutes = (dir) => {
-  const routes = [];
-  
-  const readDir = (directory) => {
-    fs.readdirSync(directory).forEach((file) => {
-      const fullPath = path.join(directory, file);
-      const stat = fs.lstatSync(fullPath);
-      
-      if (stat.isDirectory()) {
-        readDir(fullPath);
-      } else if (file === 'index.js' || file.endsWith('.js')) {
-        const relativePath = path.relative(dir, fullPath);
-        const routePath = '/' + relativePath.replace(/\\/g, '/').replace(/\/index.js$/, '').replace(/.js$/, '');
-        routes.push(routePath);
-      }
-    });
-  };
+  if (typeof window !== 'undefined') {
+    throw new Error('scanRoutes can only be run on the server');
+  }
 
-  readDir(dir);
+  const pagesDir = path.join(dir, 'pages');
+  const files = fs.readdirSync(pagesDir);
+
+  const routes = files.map(file => {
+    const route = file.replace(/\.[^/.]+$/, '');
+    return route === 'index' ? '/' : `/${route}`;
+  });
 
   return routes;
 };
 
-module.exports = scanRoutes;
+export default scanRoutes;

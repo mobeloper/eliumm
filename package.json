@@ -1,10 +1,15 @@
 {
   "name": "eliumm",
-  "version": "1.0.1",
+  "version": "1.0.6",
   "description": "eliumm fixes your code on the fly, making a crashless experience for users",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mobeloper/eliumm.git"
+  },
   "main": "lib/index.js",
   "types": "types/index.d.ts",
   "scripts": {
+    "dev": "next dev",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel src --out-dir lib",
     "build-ts": "babel src --out-dir lib && tsc --declaration"
@@ -26,6 +31,9 @@
     "@babel/preset-typescript": "^7.24.6",
     "@types/node": "^20.14.0",
     "@types/react": "^18.3.3",
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38",
+    "tailwindcss": "^3.4.3",
     "typescript": "^5.4.5"
   }
 }
