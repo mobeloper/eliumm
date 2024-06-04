@@ -113,6 +113,11 @@ export default Home;
 
 ```
 
+If used correctly your home page should render properly:
+<img width="1171" alt="EliummDemo" src="https://github.com/mobeloper/eliumm/assets/29370196/f1d4f0cf-149e-4b70-a069-8f88d4f7aa62">
+
+
+
 
 
 
