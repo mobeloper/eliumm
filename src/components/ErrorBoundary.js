@@ -92,7 +92,7 @@ class ErrorBoundary extends Component {
       return (
         <div className="flex flex-col items-center justify-center min-h-screen bg-red-50">
           <h1 className="text-2xl font-bold mb-4">Something went wrong</h1>
-          <p className="mb-4">{this.state.error.message}</p>
+          <p className="mb-4">{this.state.error ? this.state.error.message : 'An error occurred'}</p>
           <RouteButtons routes={this.state.routes} />
         </div>
       );

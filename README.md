@@ -76,6 +76,16 @@ const Home = () => {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [showRouteButtons, setShowRouteButtons] = useState(false);
+  const [routes, setRoutes] = useState([]);
+
+  const fetchRoutes = async () => {
+    try {
+      const response = await axios.get('/api/routes');
+      setRoutes(response.data);
+    } catch (err) {
+      console.error('Error fetching routes:', err);
+    }
+  };
 
   const fetchData = async () => {
     try {
@@ -85,6 +95,7 @@ const Home = () => {
       setShowRouteButtons(false); // Hide RouteButtons if data is fetched successfully
     } catch (err) {
       if (err.response && err.response.status === 500) {
+        await fetchRoutes();
         setShowRouteButtons(true);
       }
       setError(err);
@@ -94,22 +105,30 @@ const Home = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50">
-      <h1 className="text-3xl font-bold mb-4">Welcome to My Next.js App</h1>
+      <h1 className="text-3xl font-bold mb-4">Welcome to Eliumm!</h1>
       <button
         onClick={fetchData}
         className="px-4 py-2 mb-4 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition"
       >
-        Fetch Data
+        Test Eliumm
       </button>
-      {error && <p className="text-red-500 mb-4">An error occurred: {error.message}</p>}
+
       {data && <div className="text-lg text-gray-800">Data: {JSON.stringify(data)}</div>}
-      {showRouteButtons && <RouteButtons />} {/* Render RouteButtons if showRouteButtons is true */}
+
+      {error && <p className="text-black mb-4">
+        Instead of your App crashing, showing 404 pages or showing messages like this...      
+          <p className="text-red-500 mb-4">
+          An error occurred: {error.message}
+          </p>
+        Eliumm will engage your user to guide them to safe land with something like this...
+        </p>}
+      
+      {showRouteButtons && <RouteButtons routes={routes} />} {/* Render RouteButtons if showRouteButtons is true */}
     </div>
   );
 };
 
 export default Home;
-
 
 ```
 
@@ -129,7 +148,5 @@ Publish to NPM:
 npm publish
 ```
 
-# Keywords
-eliumm, crashless, webapp
 
 # References
